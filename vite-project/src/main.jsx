@@ -1,10 +1,9 @@
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import './index.css'
-import './App.css';
-const App = () => {
-  return (
-    <>
-      <h1>My App</h1>
-    </>
-  );
-};
-export default App;
+import Home from "./components/Home.jsx";
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <Home/>
+  </StrictMode>
+)
