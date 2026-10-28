@@ -1,16 +1,19 @@
 import {useState} from 'react';
+import {Route, BrowserRouter, Routes} from 'react-router';
+import Layout from './components/ src/components/layout.jsx';
+import Home from './views/Home';
 
-const MyComponent = () => {
-  const [count, setCount] = useState(0);
-
+const App = () => {
   return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="Profile" element={<Profile />} />
+          <Route path="Upload" element={<Element />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
-}
-
-export default MyComponent
+};
+export default App
