@@ -1,52 +1,27 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import MediaRow from "./MediaRow.jsx";
 import SingleView from './SingleView.jsx';
 import Single from './Single.jsx'
+import {fetchData} from "../utils/fetchData.js";
 
-
-const mediaArray = [
-  {
-    media_id: 8,
-    user_id: 5,
-    filename: '/vite-project/public/cute-curious-gray-and-white-kitten-in-a-long-shot-photo.jpg&fontsize=120',
-    thumbnail: '/hcute-curious-gray-and-white-kitten-in-a-long-shot-photo.jpg&fontsize=20',
-    filesize: 170469,
-    media_type: 'image/jpg',
-    title: 'Picture 1',
-    description: 'testing1.',
-    created_at: '2024-01-07T20:49:34.000Z',
-  },
-  {
-    media_id: 9,
-    user_id: 7,
-    filename: '/vite-project/public/cute-curious-gray-and-white-kitten-in-a-long-shot-photo.jpg&fontsize=72',
-    thumbnail: '/vite-project/public/cute-curious-gray-and-white-kitten-in-a-long-shot-photo.jpg&fontsize=20',
-    filesize: 1002912,
-    media_type: 'image/jpg',
-    title: 'Pic 2',
-    description: '',
-    created_at: '2024-01-07T21:32:27.000Z',
-  },
-  {
-    media_id: 17,
-    user_id: 2,
-    filename:
-      '/ScreenRecording_03-20-2026_22-30-26_1.mov',
-    thumbnail: 'http://place-hold.it/320/240.jpg&text=Thumb1&fontsize=20',
-    filesize: 1236616,
-    media_type: 'video/mp4',
-    title: 'Address me',
-    description: 'Address me.',
-    created_at: '2024-01-07T20:48:13.000Z',
-  },
-];
 
 const Home = () => {
-  const [selectItem, setSelectItem] = useState(null);
+  const [mediaArray, setMediaArray] = useState([]);
+  useEffect(() => {
+    const getMedia = async () => {
+    try {
+      const json = await fetchData('/test.json');
+      setMediaArray(json);
+    } catch (error) {
+      console.log("error detected", error)
+    }
+  };
+  getMedia();
+}, []);
+  console.log(mediaArray);
   return (
     <>
       <h2>My Media</h2>
-      <SingleView item={selectItem} setSelectItem={setSelectItem} />
       <table>
         <thead>
         <tr>
@@ -60,7 +35,7 @@ const Home = () => {
         </thead>
         <tbody>
         {mediaArray.map((item) => (
-          <MediaRow key={item.media_id} item={item} selectItem={selectItem} setSelectItem={setSelectItem} />
+          <MediaRow key={item.media_id} item={item} />
         ))}
         </tbody>
       </table>
