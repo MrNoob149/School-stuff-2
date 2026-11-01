@@ -1,5 +1,5 @@
 import {Route, BrowserRouter, Routes} from 'react-router';
-import Layout from './components/ src/components/layout.jsx';
+import Layout from './components/layout.jsx';
 import Home from './views/Home';
 import Single from "./views/Single.jsx";
 import Profile from "./views/Profile.jsx";

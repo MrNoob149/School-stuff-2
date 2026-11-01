@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router";
 const Single = () => {
   const {state} = useLocation();
   const navigate = useNavigate();
-  const item = state.item;
+  const item = state?.item
 
   if (!item) {
     return <p>No item selected</p>;
@@ -24,10 +24,6 @@ const Single = () => {
       ) : (
         <p>Unsupported data type</p>
       )}
-
-      <button onClick={() => setSelectItem(null)}>
-        close
-      </button>
       <button onClick={() => navigate(-1)}>Go back</button>
     </div>
   );
