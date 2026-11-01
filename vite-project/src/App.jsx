@@ -1,7 +1,9 @@
-import {useState} from 'react';
 import {Route, BrowserRouter, Routes} from 'react-router';
 import Layout from './components/ src/components/layout.jsx';
 import Home from './views/Home';
+import Single from "./views/Single.jsx";
+import Profile from "./views/Profile.jsx";
+import Upload from "./views/Upload.jsx";
 
 const App = () => {
   return (
@@ -9,8 +11,9 @@ const App = () => {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="Profile" element={<Profile />} />
-          <Route path="Upload" element={<Element />} />
+          <Route path="/single" element={<Single />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/upload" element={<Upload />} />
         </Route>
       </Routes>
     </BrowserRouter>
