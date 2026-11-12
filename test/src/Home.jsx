@@ -1,8 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import Song from "./Song"
+import App from './App'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Song/>
+    <App/>
   </StrictMode>
 )
