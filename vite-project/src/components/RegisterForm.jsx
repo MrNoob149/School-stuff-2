@@ -1,5 +1,5 @@
 import useForm from "../hooks/formHooks.js";
-import { useAuthentication } from '../hooks/apiHooks.js';
+import {useAuthentication, useUser} from '../hooks/apiHooks.js';
 import { useNavigate } from 'react-router';
 
 
@@ -43,7 +43,7 @@ const RegisterForm = () => {
         </div>
 
         <div>
-          <lavel htmlFor="registeremail">Email</lavel>
+          <label htmlFor="registeremail">Email</label>
           <input
             name="email"
             type='type'

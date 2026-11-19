@@ -3,8 +3,7 @@ import {fetchData} from "../utils/fetchData.js";
 import * as response from "zod";
 
 const useMedia = () => {
-  const {mediaArray} = useMedia();
-  const [setMediaArray] = useState([]);
+  const [mediaArray, setMediaArray] = useState([]);
   useEffect(() => {
     const getMedia = async () => {
       try {
@@ -23,7 +22,115 @@ const useMedia = () => {
   }
     console.log(mediaArray);
   return {mediaArray};
+
+  const deleteMedia = async (mediaData, token) => {
+    const responseDelete = await fetch('/test.json',
+      {
+        method: 'DELETE',
+        headers:
+          {
+            Authorization: `${token}`
+          },
+        body: JSON.stringify(mediaData),
+      }
+    )
+    if(!responseDelete.ok) {
+      console.log('error, cannot delete')
+  }
+    return responseDelete;
+}
+
+
+  const modifyMedia = async (token) => {
+    const responseModify = await fetch('test.json',
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `${token}`
+        },
+      },
+    )
+    if (!responseModify.ok) {
+      console.log('error, cannot delete')
+    }
+    return responseModify;
+  }
 };
+
+const useLike =() => {
+  const postLike = async (mediaId, token) => {
+    try {
+      const postLikeresponse = await fetch('text.json',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({media_id: mediaId}),
+      })
+      if (!postLikeresponse.ok) {
+        console.log('cannot create file')
+      }
+      return postLikeresponse
+    } catch (error) {
+      console.log('errior, cannot post')
+    }
+  }
+
+  const deleteLike = async (likeId, token) => {
+    try {
+      const deleteLikeresponse = await fetch ('text.json',
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+      if (deleteLikeresponse.ok) {
+        console.log('error, cannot delete like')
+      }
+      return deleteLikeresponse;
+    } catch (error) {
+      console.log('error, cannot delete')
+    }
+  }
+
+  const getLikeCountByMediaId = async (mediaID) => {
+    try {
+      const getLikeCountByMediaIdResponse = await fetch ('text.json',
+      {
+        method: 'GET',
+      })
+      if (!getLikeCountByMediaIdResponse.ok) {
+        console.log('error, cannot get')
+      }
+      return getLikeCountByMediaIdResponse;
+    } catch (error) {
+      console.log('error, cannot get Like by User')
+    }
+  }
+
+  const getLikeByUser = async (mediaID, token) => {
+    try {
+      const getLikeByUserResponse = await fetch('text.json',
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        })
+      if (!getLikeByUserResponse.ok) {
+        console.log('error, cannot get user like')
+      }
+      return getLikeByUserResponse;
+    } catch (error) {
+      console.log('error, cannot get Like by User')
+    }
+  }
+
+  return {postLike, deleteLike, getLikeCountByMediaId, getLikeByUser};
+}
 
 const useAuthentication = () => {
   const postLogin = async (inputs) => {
@@ -89,3 +196,5 @@ export {useMedia};
 export {useAuthentication};
 export {useUser};
 export {postFile};
+export {useLike}
+

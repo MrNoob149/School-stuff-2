@@ -1,6 +1,7 @@
 import { Link, Outlet } from 'react-router'
 import {useUserContext} from "../hooks/contextHooks.js";
 import {useEffect} from "react";
+import "tailwindcss";
 
 const Layout = () => {
   const { user, handleAutoLogin } = useUserContext();
@@ -10,7 +11,7 @@ const Layout = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex justify-end overflow-hidden m-0 p-0 bg:#333333 *text:white *text-center *display:block p-4 *:hover:bg:#111111">
       <nav>
         <ul>
           <li>
@@ -32,7 +33,8 @@ const Layout = () => {
                 <Link to="/user">User</Link>
               </li>
             </>
-          ) : (
+
+            ) : (
             <li>
               <Link to="/login">Login</Link>
             </li>
