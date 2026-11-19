@@ -1,4 +1,5 @@
 import { Link} from 'react-router';
+import Likes from '../components/Likes.jsx';
 
 const SingleView = ({item}) => {
 
@@ -7,9 +8,10 @@ const SingleView = ({item}) => {
   }
 
   return (
-    <Link to="/single" state={item}>
-      Show
-    </Link>
+    <div>
+    <Link to="/single" state={item}>Show</Link>
+      <Likes mediaid={item.media_id}/>
+    </div>
   );
 };
 
